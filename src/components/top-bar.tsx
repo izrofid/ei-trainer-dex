@@ -1,6 +1,7 @@
 import React from "react";
 import { TrainerCombobox } from "./trainer-combobox";
 import { StatSelector } from "./stat-selector";
+import { ModeToggle } from "./mode-toggle";
 
 const TopBar: React.FC = () => {
   return (
@@ -9,8 +10,11 @@ const TopBar: React.FC = () => {
         <span className="text-blue-500">Trainer</span>
         <span>Dex</span>
       </span>
-<span className="flex gap-2">      <TrainerCombobox/>
-      <StatSelector/></span>
+      <span className="flex gap-2">
+        <ModeToggle/>
+        <TrainerCombobox />
+        <StatSelector />
+      </span>
     </div>
   );
 };

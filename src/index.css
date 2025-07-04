@@ -3,9 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-temp-foreground: oklch(0.985 0 0);
-}
+@import "@/custom.css";
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

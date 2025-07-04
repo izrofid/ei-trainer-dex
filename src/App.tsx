@@ -1,7 +1,6 @@
-import "./App.css";
 import TrainerDex from "./components/trainer-dex";
 
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
   return (

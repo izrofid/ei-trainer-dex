@@ -1,0 +1,17 @@
+@theme inline {
+  --color-avatar: var(--avatar);
+  --color-paper: var(--paper);
+  --color-move: var(--move);
+}
+
+:root {
+  --avatar: #9f9fa9;
+  --paper: #d6d3d1; 
+  --move: #e5e7eb
+}
+
+.dark {
+  --avatar: #3f3f46;
+  --paper: #27272a; 
+  --move: #52525c; 
+}
