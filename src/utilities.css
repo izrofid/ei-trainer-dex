@@ -1,0 +1,16 @@
+@layer utilities {
+  /* Pixel-Perfect Sprites */
+  .rendering-pixelated {
+    image-rendering: pixelated;
+  }
+
+  /* Hide Scrollbars */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
