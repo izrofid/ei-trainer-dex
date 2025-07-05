@@ -1,3 +1,3 @@
-const getSprite = (speicesId: number) => `sprites/front/${speicesId}.png`;
+const getSprite = (speciesId: number) => `sprites/front/${speciesId}.png`;
 
 export default getSprite;
