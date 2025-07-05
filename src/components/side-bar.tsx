@@ -13,7 +13,7 @@ const SideBar: React.FC<SideBarProps> = (trainer) => {
           <div className="flex flex-col">
         {" "}
         <div className="rounded-full bg-avatar size-[192px] items-center flex flex-col justify-center">
-          <img src={getTrainerSprite()} className="size-[128px]" />
+          <img src={getTrainerSprite()} className="size-[128px] rendering-pixelated" />
         </div>
         <div className= "w-full items-center flex justify-center flex-col text-left py-2">
           {" "}

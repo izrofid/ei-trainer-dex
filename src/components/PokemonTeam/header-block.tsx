@@ -27,13 +27,13 @@ const HeaderBlock: React.FC<HeaderBlockProps> = ({ trainerMon }) => {
             {species ? species.nameKey : "Unknown Species"}
           </span>
         </span>
-        <span className="text-xs px-2 py-1 rounded-md bg-card">
+        <span className="text-xs px-1 rounded-md text-subtle">
           Lvl {trainerMon.level} @{" "}
           {trainerMon.heldItem
             ? `${getItemName(trainerMon.heldItem)}`
             : "No Item"}
         </span>
-        <span className="text-xs bg-card rounded-md px-2 py-1">
+        <span className="text-xs text-subtle rounded-md px-1">
           {` Ability: ${getAbilityName(trainerMon.ability)}`}
         </span>
       </div>
