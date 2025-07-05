@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react"
+import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -12,39 +11,22 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-
-const trainers = [
-    {
-        value: "ash",
-        label: "Ash Ketchum",
-    },
-    {
-        value: "misty",
-        label: "Misty",
-    },
-    {
-        value: "brock",
-        label: "Brock",
-    },
-    {
-        value: "serena",
-        label: "Serena",
-    },
-    {
-        value: "cynthia",
-        label: "Cynthia",
-    },
-]
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { getTrainer, getTrainerList } from "@/utils/trainerUtils";
+import { useTrainerStore } from "@/stores/useTrainerStore";
 
 export function TrainerCombobox() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
+  const trainers = React.useMemo(() => getTrainerList(), []);
+  const selectedTrainer = useTrainerStore((state) => state.trainer)
+  const setTrainer = useTrainerStore((state) => state.setTrainer);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -55,14 +37,24 @@ export function TrainerCombobox() {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? trainers.find((trainer) => trainer.value === value)?.label
+          {selectedTrainer
+            ? `${selectedTrainer?.trainerClass} ${selectedTrainer?.trainerName}`
             : "Select trainer..."}
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
-        <Command>
+        <Command
+          filter={(value, search) => {
+            const trainer = trainers.find((t) => t.value.toString() === value);
+            if (!trainer) return 0;
+            return trainer.label
+              .toLowerCase()
+              .includes(search.toLowerCase())
+              ? 1
+              : 0;
+          }}
+        >
           <CommandInput placeholder="Search trainer..." />
           <CommandList>
             <CommandEmpty>No trainer found.</CommandEmpty>
@@ -70,16 +62,21 @@ export function TrainerCombobox() {
               {trainers.map((trainer) => (
                 <CommandItem
                   key={trainer.value}
-                  value={trainer.value}
+                  value={trainer.value.toString()}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
+                    setValue(currentValue === value ? "" : currentValue);
+                    const selectedTrainer = getTrainer(parseInt(currentValue));
+                    console.log(`Selected trainer:`, selectedTrainer);
+                    setTrainer(selectedTrainer);
+                    setOpen(false);
                   }}
                 >
                   <CheckIcon
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === trainer.value ? "opacity-100" : "opacity-0"
+                      value === trainer.value.toString()
+                        ? "opacity-100"
+                        : "opacity-0"
                     )}
                   />
                   {trainer.label}
@@ -90,5 +87,5 @@ export function TrainerCombobox() {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

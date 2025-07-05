@@ -1,11 +1,15 @@
 import React from "react";
-import { getMoveName } from "../../utils/moveUtils";
+import { getDefaultMoveSet, getMoveName } from "../../utils/moveUtils";
+import type { TrainerMon } from "@/utils/trainerUtils";
 
 
-type MoveBlockProps = {  moves: number[];
+type MoveBlockProps = {  mon: TrainerMon
 };
 
-const MoveBlock: React.FC<MoveBlockProps> = ({moves}) => {
+const MoveBlock: React.FC<MoveBlockProps> = ({mon}) => {
+
+  const moves = mon.moves ?? getDefaultMoveSet(mon);
+
   return (
     <div className="py-2 mt-2 mb-3">
       <div className="grid grid-cols-2 gap-2">

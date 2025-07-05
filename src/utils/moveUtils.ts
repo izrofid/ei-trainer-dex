@@ -1,4 +1,6 @@
-import moveData from "../data/moveData.json"
+import moveData from "../data/moveData.json";
+import { getSpeciesData } from "./SpeciesUtils";
+import { validateMoves, type TrainerMon } from "./trainerUtils";
 
 export interface Move {
   moveId: number;
@@ -27,3 +29,14 @@ function getMoveName(id: number) {
 }
 
 export { getMoveData, getMoveName };
+
+export const getDefaultMoveSet = (mon: TrainerMon) => {
+  const species = getSpeciesData(mon.species);
+  const learnableMoves = species.levelUpMoves.filter(
+    (moveArray) => moveArray[1] <= mon.level
+  );
+  const moveset = learnableMoves.slice(-4).map((moveArray) => moveArray[0]);
+
+  if (validateMoves(moveset)) return moveset;
+  else throw new Error("invalid moveset")
+};

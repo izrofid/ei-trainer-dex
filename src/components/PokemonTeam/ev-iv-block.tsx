@@ -1,11 +1,18 @@
 import React from "react";
 
 type EvIvBlockProps = {
-  ev: number[];
-  iv: number[];
+  ev?: number[];
+  iv?: number[];
 };
 
-const EvIvBlock: React.FC<EvIvBlockProps> = ({ ev, iv }) => {
+const defaultEv = [0, 0, 0, 0, 0, 0];
+const defaultIv = [0, 0, 0, 0, 0, 0];
+
+const EvIvBlock: React.FC<EvIvBlockProps> = (EvIvBlockProps) => {
+
+  const ev = EvIvBlockProps.ev || defaultEv;
+  const iv = EvIvBlockProps.iv || defaultIv;
+
   return (
     <>
       <div className="bg-popover rounded-lg p-2">

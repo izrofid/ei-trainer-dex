@@ -1,7 +1,7 @@
 import React from "react";
 import getSprite from "../../utils/getSprite";
-import { getSpeciesData } from "@/utils/SpeciesUtils";
-import type { TrainerMon } from "./pokemon-block";
+import { getMonAbility, getSpeciesData } from "@/utils/SpeciesUtils";
+import type { TrainerMon } from "@/utils/trainerUtils";
 import { getAbilityName } from "@/utils/abilityUtils";
 import { getItemName } from "@/utils/itemUtils";
 
@@ -10,7 +10,9 @@ type HeaderBlockProps = {
 };
 
 const HeaderBlock: React.FC<HeaderBlockProps> = ({ trainerMon }) => {
-  const species = getSpeciesData(trainerMon.speciesId);
+  const species = getSpeciesData(trainerMon.species);
+
+  const ability = trainerMon.ability ? trainerMon.ability : getMonAbility(trainerMon.species);
 
   return (
     <div className="flex items-center gap-2">
@@ -34,7 +36,7 @@ const HeaderBlock: React.FC<HeaderBlockProps> = ({ trainerMon }) => {
             : "No Item"}
         </span>
         <span className="text-xs text-subtle rounded-md px-1">
-          {` Ability: ${getAbilityName(trainerMon.ability)}`}
+          {` Ability: ${getAbilityName(ability)}`}
         </span>
       </div>
     </div>

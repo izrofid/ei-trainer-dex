@@ -35,3 +35,8 @@ export function getSpeciesData(speciesId: number): Pokemon {
   if (!s) throw new Error(`Species ${speciesId} not found`);
   return s;
 }
+
+export const getMonAbility = (species: number, slot: number = 0) => {
+  const ability = getSpeciesData(species).abilities[slot]
+  return ability
+}
